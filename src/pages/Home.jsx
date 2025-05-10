@@ -7,7 +7,7 @@ import AboutMe from '../Components/AboutMe'
 import Skills from '../Components/Skills.jsx'
 import Projects from '../Components/Projects.jsx'
 import Contact from '../Components/Contact.jsx'
-import { Footer } from '../Components/footer.jsx'
+import  Footer  from '../Components/Footer.jsx'
 
 const Home = () => {
   return (
