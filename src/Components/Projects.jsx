@@ -5,7 +5,7 @@ const projects = [
     id: 1,
     title: "VOICE - Voice of Information in Critical and Emergency Situation",
     description: "A pre and post disaster management app",
-    image: "public/projects/project1.png",
+    image: "/projects/Project1.png",
     tags: ["React", "TailwindCSS", "Next.js" ,"Leaflet", "Twilio" , "MongoDB"],
     demoUrl: "https://voice-disaster-management.vercel.app/",
     githubUrl: "https://github.com/Shubham-Yadav22/VOICE_DisasterManagement",
@@ -15,7 +15,7 @@ const projects = [
     title: "Chowkidaar",
     description:
       "A Dress Code Monitoring and Detection Application.",
-    image: "public/projects/project3.png",
+    image: "/projects/Project3.png",
     tags: ["YOLO", "Next.js", "Image Annotation"],
     // demoUrl: "",
     // githubUrl: "",
@@ -25,7 +25,7 @@ const projects = [
     title: "Philosophy-Spectrum",
     description:
       "A React Application which tells where you stand on the philosophy spectrum.",
-    image: "public/projects/project2.png",
+    image: "/projects/Project2.png",
     tags: ["React", "Framer-Motion"],
     demoUrl: "https://philosophy-spectrum.onrender.com/",
     githubUrl: "https://github.com/Shubham-Yadav22/Philosophy-Spectrum",

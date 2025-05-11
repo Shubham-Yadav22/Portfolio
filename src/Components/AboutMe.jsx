@@ -32,8 +32,8 @@ const AboutMe = () => {
                 
                       {/* Download CV button */}
                       <a
-                        href="public/shubhamCV.pdf"  // Your actual file name in the public folder
-                        download="shubhamCV.pdf"  // Optional: custom file name for download
+                        href="/shubhamCV.pdf"  // Your actual file name in the public folder
+                        download="My_CV.pdf"  // Optional: custom file name for download
                         className='px-6 py-2 rounded-full border border-primary text-primary hover:bg-primary/10 transition-colors duration-300'
                       >
                         Download CV

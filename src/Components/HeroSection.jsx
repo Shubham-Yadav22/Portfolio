@@ -11,7 +11,7 @@ const HeroSection = () => {
         {/* Modern Glass Effect Image Card */}
         <div className="relative w-64 h-64 mx-auto mb-6 rounded-xl overflow-hidden bg-white/10 backdrop-blur-md border border-white/20 shadow-xl transition-transform hover:scale-105 duration-300">
           <img 
-            src="/public/projects/MYPHOTO2.jpg" // Replace with your actual image
+            src="/projects/MYPHOTO2.jpg" // Replace with your actual image
             alt="Shubham"
             className="w-full h-full object-cover"
           />
