@@ -5,59 +5,51 @@ import {
   MapPin,
   Phone,
   Send,
-  Twitch,
   Twitter,
 } from "lucide-react";
 import { cn } from "../lib/utils";
 import { useToast } from "../hooks/use-toast";
 import { useState } from "react";
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+ 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  setIsSubmitting(true);
+    e.preventDefault();
+    setIsSubmitting(true);
 
-  const formData = new FormData(e.target);
-  const data = {
-    name: formData.get("name"),
-    email: formData.get("email"),
-    message: formData.get("message"),
-  };
+    const formData = new FormData(e.target);
+    const data = {
+      from_name: formData.get("name"),
+      to_name: "Shubham", // Your name as the recipient
+      message: formData.get("message"),
+      reply_to: formData.get("email"), // User's email for replying
+    };
 
-  try {
-    const res = await fetch("https://backendforportfolio-production.up.railway.app/send", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-
-    const result = await res.json();
-
-    if (res.ok) {
+    try {
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        data,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
       toast({
         title: "Message sent!",
         description: "Thank you for your message. I'll get back to you soon.",
       });
       e.target.reset();
-    } else {
+    } catch (error) {
+      console.error(error);
       toast({
         title: "Error",
-        description: result.message || "Failed to send message",
+        description: "Failed to send message. Please try again later.",
       });
+    } finally {
+      setIsSubmitting(false);
     }
-  } catch (error) {
-    console.error(error);
-    toast({
-      title: "Network Error",
-      description: "Please try again later.",
-    });
-  } finally {
-    setIsSubmitting(false);
-  }
-};
+  };
 
   return (
     <section id="contact" className="py-24 px-4 relative bg-secondary/30">
@@ -86,7 +78,7 @@ const Contact = () => {
                 <div>
                   <h4 className="font-medium"> Email</h4>
                   <a
-                    href="mailto:hello@gmail.com"
+                    href="mailto:432shobhit@gmail.com"
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
                     432shobhit@gmail.com
@@ -100,7 +92,7 @@ const Contact = () => {
                 <div>
                   <h4 className="font-medium"> Phone</h4>
                   <a
-                    href="tel:+11234567890"
+                    href="tel:+919305971086"
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
                     +91 9305971086
@@ -114,7 +106,7 @@ const Contact = () => {
                 <div>
                   <h4 className="font-medium"> Location</h4>
                   <a className="text-muted-foreground hover:text-primary transition-colors">
-                    Lucknow , Uttar Pradesh 
+                    Lucknow, Uttar Pradesh 
                   </a>
                 </div>
               </div>
@@ -123,26 +115,23 @@ const Contact = () => {
             <div className="pt-8">
               <h4 className="font-medium mb-4"> Connect With Me</h4>
               <div className="flex space-x-4 justify-center">
-                <a href="https://www.linkedin.com/in/shubham2code/" target="_blank">
+                <a href="https://www.linkedin.com/in/shubham2code/" target="_blank" rel="noopener noreferrer">
                   <Linkedin />
                 </a>
-                <a href="https://x.com/shubham_10679" target="_blank">
+                <a href="https://x.com/shubham_10679" target="_blank" rel="noopener noreferrer">
                   <Twitter />
                 </a>
-                <a href="https://www.instagram.com/grim_reaper.22/" target="_blank">
+                <a href="https://www.instagram.com/grim_reaper.22/" target="_blank" rel="noopener noreferrer">
                   <Instagram />
                 </a>
               </div>
             </div>
           </div>
 
-          <div
-            className="bg-card p-8 rounded-lg shadow-xs"
-            onSubmit={handleSubmit}
-          >
+          <div className="bg-card p-8 rounded-lg shadow-xs">
             <h3 className="text-2xl font-semibold mb-6"> Send a Message</h3>
 
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label
                   htmlFor="name"
@@ -156,7 +145,7 @@ const Contact = () => {
                   id="name"
                   name="name"
                   required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden foucs:ring-2 focus:ring-primary"
+                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary"
                   placeholder="Shubham Yadav..."
                 />
               </div>
@@ -174,7 +163,7 @@ const Contact = () => {
                   id="email"
                   name="email"
                   required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden foucs:ring-2 focus:ring-primary"
+                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary"
                   placeholder="john@gmail.com"
                 />
               </div>
@@ -191,7 +180,8 @@ const Contact = () => {
                   id="message"
                   name="message"
                   required
-                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden foucs:ring-2 focus:ring-primary resize-none"
+                  rows={4}
+                  className="w-full px-4 py-3 rounded-md border border-input bg-background focus:outline-hidden focus:ring-2 focus:ring-primary resize-none"
                   placeholder="Hello, I'd like to talk about..."
                 />
               </div>
@@ -214,4 +204,4 @@ const Contact = () => {
   );
 };
 
-export default Contact
+export default Contact;
